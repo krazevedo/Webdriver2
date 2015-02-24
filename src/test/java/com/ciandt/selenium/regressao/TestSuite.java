@@ -10,7 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 
 @RunWith(Suite.class)
-@SuiteClasses({ CreateCND.class, ActiveCND.class, AcceptedCND.class})
+@SuiteClasses({ CreateCND.class})
 public class TestSuite {
 	
 }
