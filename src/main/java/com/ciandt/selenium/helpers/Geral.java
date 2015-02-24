@@ -13,7 +13,7 @@ public class Geral{
 	
 
 	public void abrirCadastro(WebDriver driver){
-		driver.get("http://vmsoanatuel030:7510/cadastro/passo-1");		
+		driver.get("http://vmsoanatuel006:7510/cadastro/passo-1");		
 	}
 
 	public void abrirATG(WebDriver driver){

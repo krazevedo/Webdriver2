@@ -131,7 +131,7 @@ public class Passo1 extends TestBase{
 	}
 
 	public void finalizaPasso() throws Exception{
-		Thread.sleep(4000);
+		Thread.sleep(10000);
 		driver.findElement(By.cssSelector("div#btn-submit-form > button")).click();
 	}
 
