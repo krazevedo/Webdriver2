@@ -1,8 +1,9 @@
 package com.ciandt.selenium.regressao;
 
+import static org.junit.Assert.fail;
+
 import org.junit.After;
 import org.junit.Test;
-import static org.junit.Assert.fail;
 
 import com.ciandt.selenium.helpers.Geral;
 import com.ciandt.selenium.pages.Finalizado;

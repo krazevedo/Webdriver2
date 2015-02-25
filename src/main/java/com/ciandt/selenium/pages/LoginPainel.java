@@ -1,7 +1,6 @@
 package com.ciandt.selenium.pages;
 
 import org.openqa.selenium.By;
-
 import com.ciandt.selenium.regressao.TestBase;
 
 public class LoginPainel extends TestBase {

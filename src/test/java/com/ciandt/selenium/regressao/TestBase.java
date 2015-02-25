@@ -8,8 +8,7 @@ import org.junit.Rule;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.ciandt.selenium.helpers.ScreenshotRule;
+import com.ciandt.selenium.helpers.ScreenshotRule; 
 
 public class TestBase{
 	protected static WebDriver driver;
