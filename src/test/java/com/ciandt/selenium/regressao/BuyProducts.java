@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 import org.junit.After;
 import org.junit.Test;
 
+import com.ciandt.selenium.helpers.DataDriven;
 import com.ciandt.selenium.helpers.Geral;
 import com.ciandt.selenium.pages.Entrega;
 import com.ciandt.selenium.pages.FinalizarCompra;
@@ -17,11 +18,12 @@ public class BuyProducts extends TestBase{
 	HomeEspaco home = new HomeEspaco();
 	FinalizarCompra finalizar = new FinalizarCompra();
 	Identificacao identificacao = new Identificacao();
+	DataDriven properties = new DataDriven();
 	public StringBuffer verificationErrors = new StringBuffer();	
 	String nomeEspaco = "0112emepon";
 	String email = "1802ikin@teste.com.br";
 	String pass  = "inicial1";
-	
+
 
 	@Test
 	public void cadastrarCliente() throws Exception {
@@ -34,13 +36,14 @@ public class BuyProducts extends TestBase{
 
 	@Test
 	public void comprarProdutoClienteExistente() throws Exception {
-		home.realizarLogin(nomeEspaco, email, pass);
+		properties.lerArquivo();
+		home.realizarLogin(nomeEspaco, properties.getProperties().getProperty("login"), properties.getProperties().getProperty("password"));
 		home.validarClienteLogado();
 		home.incluirProdutoSacola(nomeEspaco);
 		entrega.confirmarEndereco();
 		finalizar.finalizarCompra();
 	}
-	
+
 	@Test
 	public void comprarVariosProdutosClienteExistente() throws Exception {
 		home.realizarLogin(nomeEspaco, email, pass);
@@ -50,7 +53,7 @@ public class BuyProducts extends TestBase{
 		entrega.confirmarEndereco();
 		finalizar.finalizarCompra();
 	}
-	
+
 	@Test
 	public void comprarProdutoClienteNovo() throws Exception {
 		home.cadastrarCliente(nomeEspaco);
@@ -62,7 +65,7 @@ public class BuyProducts extends TestBase{
 		entrega.confirmarEndereco();
 		finalizar.finalizarCompra();
 	}
-	
+
 	@Test
 	public void comprarVariosProdutosClienteNovo() throws Exception {
 		home.cadastrarCliente(nomeEspaco);
