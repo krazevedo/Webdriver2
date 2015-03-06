@@ -20,14 +20,12 @@ public class BuyProducts extends TestBase{
 	Identificacao identificacao = new Identificacao();
 	DataDriven properties = new DataDriven();
 	public StringBuffer verificationErrors = new StringBuffer();	
-	String nomeEspaco = "0112emepon";
-	String email = "1802ikin@teste.com.br";
-	String pass  = "inicial1";
-
+	
 
 	@Test
 	public void cadastrarCliente() throws Exception {
-		home.cadastrarCliente(nomeEspaco);
+		properties.lerArquivo();
+		home.cadastrarCliente(properties.getProperties().getProperty("espaco"));
 		identificacao.minhaPrimeiraCompra();
 		home.validarClienteLogado();			
 		home.completarCadastro();
@@ -37,29 +35,31 @@ public class BuyProducts extends TestBase{
 	@Test
 	public void comprarProdutoClienteExistente() throws Exception {
 		properties.lerArquivo();
-		home.realizarLogin(nomeEspaco, properties.getProperties().getProperty("login"), properties.getProperties().getProperty("password"));
+		home.realizarLogin(properties.getProperties().getProperty("espaco"), properties.getProperties().getProperty("login"), properties.getProperties().getProperty("password"));
 		home.validarClienteLogado();
-		home.incluirProdutoSacola(nomeEspaco);
+		home.incluirProdutoSacola(properties.getProperties().getProperty("espaco"));
 		entrega.confirmarEndereco();
 		finalizar.finalizarCompra();
 	}
 
 	@Test
 	public void comprarVariosProdutosClienteExistente() throws Exception {
-		home.realizarLogin(nomeEspaco, email, pass);
+		properties.lerArquivo();
+		home.realizarLogin(properties.getProperties().getProperty("espaco"), properties.getProperties().getProperty("login"), properties.getProperties().getProperty("password"));
 		home.validarClienteLogado();
-		home.incluirProdutoSacola(nomeEspaco);
-		home.incluirMaisProdutosSacola(nomeEspaco);
+		home.incluirProdutoSacola(properties.getProperties().getProperty("espaco"));
+		home.incluirMaisProdutosSacola(properties.getProperties().getProperty("espaco"));
 		entrega.confirmarEndereco();
 		finalizar.finalizarCompra();
 	}
 
 	@Test
 	public void comprarProdutoClienteNovo() throws Exception {
-		home.cadastrarCliente(nomeEspaco);
+		properties.lerArquivo();
+		home.cadastrarCliente(properties.getProperties().getProperty("espaco"));
 		identificacao.minhaPrimeiraCompra();
 		home.validarClienteLogado();
-		home.incluirProdutoSacola(nomeEspaco);
+		home.incluirProdutoSacola(properties.getProperties().getProperty("espaco"));
 		identificacao.completarCadastroComPedido();
 		entrega.preencheEndereco();
 		entrega.confirmarEndereco();
@@ -68,11 +68,12 @@ public class BuyProducts extends TestBase{
 
 	@Test
 	public void comprarVariosProdutosClienteNovo() throws Exception {
-		home.cadastrarCliente(nomeEspaco);
+		properties.lerArquivo();
+		home.cadastrarCliente(properties.getProperties().getProperty("espaco"));
 		identificacao.minhaPrimeiraCompra();
 		home.validarClienteLogado();
-		home.incluirProdutoSacola(nomeEspaco);
-		home.incluirMaisProdutosSacola(nomeEspaco);
+		home.incluirProdutoSacola(properties.getProperties().getProperty("espaco"));
+		home.incluirMaisProdutosSacola(properties.getProperties().getProperty("espaco"));
 		identificacao.completarCadastroComPedido();
 		entrega.preencheEndereco();
 		entrega.confirmarEndereco();
@@ -81,10 +82,11 @@ public class BuyProducts extends TestBase{
 
 	@Test
 	public void abandonarSacola() throws Exception {
-		home.cadastrarCliente(nomeEspaco);
+		properties.lerArquivo();
+		home.cadastrarCliente(properties.getProperties().getProperty("espaco"));
 		identificacao.minhaPrimeiraCompra();
 		home.validarClienteLogado();
-		home.incluirProdutoSacola(nomeEspaco);
+		home.incluirProdutoSacola(properties.getProperties().getProperty("espaco"));
 	}
 
 	@After

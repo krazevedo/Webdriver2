@@ -1,6 +1,7 @@
 package com.ciandt.selenium.pages;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.openqa.selenium.By;
@@ -38,7 +39,7 @@ public class Identificacao extends TestBase{
 		driver.findElement(By.id("field-identification-email")).sendKeys(email);		
 		driver.findElement(By.id("cep")).click();
 		driver.findElement(By.id("cep")).clear();
-		driver.findElement(By.id("cep")).sendKeys("13010-211");
+		driver.findElement(By.id("cep")).sendKeys("26130-530");
 		driver.findElement(By.id("new-name")).clear();
 		driver.findElement(By.id("new-name")).sendKeys("Teste");
 		driver.findElement(By.id("new-password")).clear();
@@ -52,9 +53,17 @@ public class Identificacao extends TestBase{
 	public void completarCadastroComPedido() throws Exception{
 		driver.get("https://s.staging2.rede.natura.net/minha-sacola");
 		Thread.sleep(4000);
-		Date date = new Date() ;
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
-		data = dateFormat.format(date);
+		
+		SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date()); // Now use today date.
+		c.add(Calendar.DATE, 5); // Adding 5 days
+		String day = dayFormat.format(c.getTime());
+		
+		Date mes = new Date();
+		SimpleDateFormat mesFormat = new SimpleDateFormat("MM");
+		String month = mesFormat.format(mes);
+		
 		String cpf = geral.geraCPF();
 		driver.findElement(By.id("cpf")).clear();
 		driver.findElement(By.id("cpf")).sendKeys(cpf);
@@ -66,7 +75,7 @@ public class Identificacao extends TestBase{
 		driver.findElement(By.id("sobrenome")).clear();
 		driver.findElement(By.id("sobrenome")).sendKeys("CIT");
 		driver.findElement(By.id("dt-nascimento")).clear();		
-		driver.findElement(By.id("dt-nascimento")).sendKeys( data + "/1980");
+		driver.findElement(By.id("dt-nascimento")).sendKeys(day + month + "/1980");
 		WebElement radioBtn = driver.findElement(By.id("male-radio"));
 		radioBtn.click();
 		driver.findElement(By.id("ddd-phone1")).clear();
@@ -84,9 +93,16 @@ public class Identificacao extends TestBase{
 	
 	
 	public void completarCadastroSemPedido() throws Exception{
-		Date date = new Date() ;
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM");
-		data = dateFormat.format(date); 		
+		SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date()); // Now use today date.
+		c.add(Calendar.DATE, 5); // Adding 5 days
+		String day = dayFormat.format(c.getTime());
+		
+		Date mes = new Date();
+		SimpleDateFormat mesFormat = new SimpleDateFormat("MM");
+		String month = mesFormat.format(mes); 
+		
 		String cpf = geral.geraCPF();
 	    driver.findElement(By.id("cpf")).clear();
 	    driver.findElement(By.id("cpf")).sendKeys(cpf);
@@ -95,7 +111,7 @@ public class Identificacao extends TestBase{
 	    driver.findElement(By.id("surname")).clear();
 	    driver.findElement(By.id("surname")).sendKeys("CIT");
 	    driver.findElement(By.id("birthdate")).clear();
-	    driver.findElement(By.id("birthdate")).sendKeys(data + "/1980");
+	    driver.findElement(By.id("birthdate")).sendKeys(day + month + "/1980");
 	    driver.findElement(By.id("gender-male")).click();
 	    driver.findElement(By.id("ddd-phone1")).clear();
 	    driver.findElement(By.id("ddd-phone1")).sendKeys("19");
