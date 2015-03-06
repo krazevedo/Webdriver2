@@ -18,8 +18,8 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>	
-			<scope>test</scope>		
+			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -32,4 +32,21 @@
 			<version>2.6.12</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<sourceDirectory>${basedir}\src\main\java</sourceDirectory>
+		<scriptSourceDirectory>${basedir}\src\main\scripts</scriptSourceDirectory>
+		<testSourceDirectory>${basedir}\src\test\java</testSourceDirectory>
+		<outputDirectory>${basedir}\target\classes</outputDirectory>
+		<testOutputDirectory>${basedir}\target\test-classes</testOutputDirectory>
+		<resources>
+			<resource>
+				<directory>${basedir}\src\main\resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>${basedir}\src\test\resources</directory>
+			</testResource>
+		</testResources>
+	</build>	
 </project>
