@@ -16,23 +16,24 @@ public class Passo2 extends TestBase{
 	public void verificarPasso2() throws Exception{
 		for (int second = 0;; second++) {
 			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.id("nomeDoTitularCartao"))) break; } catch (Exception e) {}
+			try { if (isElementPresent(By.cssSelector("div#fNomeDoTitularCartao > input#creditcardnameholder"))) break; } catch (Exception e) {}
 			Thread.sleep(1000);
 		}
 	}
 
 	public void preencherNomeTitular(){
-		driver.findElement(By.id("nomeDoTitularCartao")).sendKeys("TESTE CIT");
+		driver.findElement(By.cssSelector("div#fNomeDoTitularCartao > input#creditcardnameholder")).sendKeys("TESTE CIT");
 	}
 
 	public void preencherNumeroCartao(){
-		driver.findElement(By.cssSelector("input#numeroCartao")).sendKeys("5105966451598457");
+		driver.findElement(By.cssSelector("div#fnumeroCartao > input#creditcardnumber")).click();
+		driver.findElement(By.cssSelector("div#fnumeroCartao > input#creditcardnumber")).sendKeys("5555666677778884");
 	}
 
 	public void preencherDataExpiracao(){
-		driver.findElement(By.id("dropdownMesExpirado")).click();
+		driver.findElement(By.cssSelector("div#creditcardexpiremonth > button#btn_creditcardexpiremonth")).click();
 		driver.findElement(By.linkText("Agosto")).click();
-		driver.findElement(By.id("dropdownAnoExpirado")).click();
+		driver.findElement(By.cssSelector("div#creditcardexpireyear > button#btn_creditcardexpireyear")).click();
 		driver.findElement(By.linkText("2020")).click();
 	}
 

@@ -51,7 +51,7 @@ public class Identificacao extends TestBase{
 	}
 
 	public void completarCadastroComPedido() throws Exception{
-		driver.get("https://s.staging2.rede.natura.net/minha-sacola");
+		driver.get("https://s.staging2.rede.natura.net/checkout-v2/register/");
 		Thread.sleep(4000);
 		
 		SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
@@ -124,6 +124,7 @@ public class Identificacao extends TestBase{
 	    WebElement scroll2 = driver.findElement(By.id("phone1"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll2);
 		Thread.sleep(500); 
-	    driver.findElement(By.linkText("salvar alterações")).click();	    
+	    driver.findElement(By.linkText("salvar alterações")).click();
+	    Thread.sleep(2000);
 	}
 }

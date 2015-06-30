@@ -37,7 +37,7 @@ public class Passo1 extends TestBase{
 	public void preencheNomeEspaco() throws Exception{
 		for (int second = 0;; second++) {
 			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.name("nomeDoEspaco"))) break; } catch (Exception e) {}
+			try { if (isElementPresent(By.id("virtualAddress"))) break; } catch (Exception e) {}
 			Thread.sleep(1000);
 		}
 
@@ -46,7 +46,9 @@ public class Passo1 extends TestBase{
 
 		for (int name = 0; name <= 3; name++){
 			gerarNomeEspaco();
-			driver.findElement(By.name("nomeDoEspaco")).sendKeys(nomeEspaco);
+			driver.findElement(By.name("virtualAddress")).sendKeys(nomeEspaco);
+			driver.findElement(By.id("btn-espaco")).click();
+			Thread.sleep(1000);
 			driver.findElement(By.id("btn-espaco")).click();
 			WebElement webElement2 = driver.findElement(By.cssSelector("div#row-espaco > div > div > fieldset > div[class*='tooltip-validacao']"));
 			String b = webElement2.getAttribute("class");
@@ -54,28 +56,37 @@ public class Passo1 extends TestBase{
 				break;
 			} 
 			driver.findElement(By.cssSelector("p#box-escolha-nome-do-espaco > input")).clear();
-			}	
+		}
 	}
 	
 	public static String[] getCND(){
 		return nomeCND;
 	}
-	
-	public void preencheCPF(){
+
+	public void preencheCPF() throws Exception{
 		String cpf = geral.geraCPF();
-		driver.findElement(By.cssSelector("input#cpf")).sendKeys(cpf);
+		String formatcpf = geral.format("###.###.###-##", cpf);
+		WebElement scroll = driver.findElement(By.name("virtualAddress"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);		
+		Thread.sleep(1000);
+		driver.findElement(By.cssSelector("div#fCpf > input#document1")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.cssSelector("div#fCpf > input#document1")).sendKeys(formatcpf);
 	}
 
-	public void preencheDataNasc(){
-		driver.findElement(By.cssSelector("input#birthday")).sendKeys("01/01/1980");
-		WebElement element = driver.findElement(By.cssSelector("input#birthday"));
+	public void preencheDataNasc()  throws Exception{
+		driver.findElement(By.cssSelector("div#fBirthday > input#birthday")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.cssSelector("div#fBirthday > input#birthday")).sendKeys("01/01/1980");
+		WebElement element = driver.findElement(By.cssSelector("div#fBirthday > input#birthday"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].focus(); arguments[0].blur(); return true", element);
+
 	}
 
 	public void preencheNomeCND(){
-		driver.findElement(By.id("name")).sendKeys("Teste");
-		driver.findElement(By.id("lastname")).sendKeys("CIT");
+		driver.findElement(By.id("name")).sendKeys("João José");
+		driver.findElement(By.id("lastname")).sendKeys("de Maná");
 	}
 
 	public void gerarEmail(){
@@ -102,14 +113,16 @@ public class Passo1 extends TestBase{
 	}
 
 	public void preencheTelefones(){
-		driver.findElement(By.cssSelector("input#phone")).sendKeys("(19) 3444-4444");
-		WebElement element1 = driver.findElement(By.cssSelector("input#phone"));
+		driver.findElement(By.cssSelector("div#fPhone > input#phone")).sendKeys("(019) 3444-4444");
+		WebElement element1 = driver.findElement(By.cssSelector("div#fPhone > input#phone"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].focus(); arguments[0].blur(); return true", element1);
 	}
 
 	public void selecionarGenero() throws Exception{		 
-		driver.findElement(By.id("dropdownGenero")).sendKeys(Keys.ENTER);
+		driver.findElement(By.cssSelector("div#fGenero > button#dropdownGenero")).sendKeys(Keys.ENTER);
+		WebElement scroll = driver.findElement(By.cssSelector("div#fPhone > input#phone"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
 		driver.findElement(By.cssSelector("div#fGenero > ul > li:nth-child(1) > a")).click();			
 	}
 
@@ -117,12 +130,17 @@ public class Passo1 extends TestBase{
 		driver.findElement(By.id("rg")).sendKeys("2977269");
 	}
 
-	public void preencherEndereco(){
-		driver.findElement(By.cssSelector("input#cep")).sendKeys("13460-000");
-		WebElement element2 = driver.findElement(By.cssSelector("input#cep"));
+	public void preencherEndereco() throws Exception{
+		driver.findElement(By.cssSelector("div#fCep > input#cep")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.cssSelector("div#fCep > input#cep")).sendKeys("13460-000");
+		WebElement element = driver.findElement(By.cssSelector("div#fCep > input#cep"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].focus(); arguments[0].blur(); return true", element2);
-		driver.findElement(By.id("numero")).sendKeys("111");
+		js.executeScript("arguments[0].focus(); arguments[0].blur(); return true", element);
+		driver.findElement(By.cssSelector("div#fNumero > input#addressNumber")).sendKeys("111");
+		Thread.sleep(5000);
+		driver.findElement(By.cssSelector("div#fBairro > input#addressNeighborhood")).sendKeys("bairro");
+		driver.findElement(By.cssSelector("div#fLogradouro > input#street")).sendKeys("Rua");
 	}
 
 	public void selecionarCheckBoxes(){
@@ -131,7 +149,7 @@ public class Passo1 extends TestBase{
 	}
 
 	public void finalizaPasso() throws Exception{
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 		driver.findElement(By.cssSelector("div#btn-submit-form > button")).click();
 	}
 

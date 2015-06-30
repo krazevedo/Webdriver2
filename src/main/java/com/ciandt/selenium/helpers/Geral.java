@@ -2,8 +2,11 @@ package com.ciandt.selenium.helpers;
 
 
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.swing.text.MaskFormatter;
 
 import org.openqa.selenium.WebDriver;
 
@@ -13,7 +16,8 @@ public class Geral{
 	
 
 	public void abrirCadastro(WebDriver driver){
-		driver.get("http://vmsoanatuel006:7510/cadastro/passo-1");		
+		driver.get("http://cadastrohml.rede.natura.net/cadastro");
+		/*driver.get("http://alfeu:7009/cadastro");*/
 	}
 
 	public void abrirATG(WebDriver driver){
@@ -97,4 +101,16 @@ public class Geral{
 		String numDig = cpf.substring(0, 9);    
 		return calcDigVerif(numDig).equals(cpf.substring(9, 11));    
 	} 
+	
+	public String format(String pattern, Object value) {
+        MaskFormatter mask;
+        try {
+            mask = new MaskFormatter(pattern);
+            mask.setValueContainsLiteralCharacters(false);
+            return mask.valueToString(value);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
