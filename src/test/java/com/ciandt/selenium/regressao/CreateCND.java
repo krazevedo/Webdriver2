@@ -16,7 +16,7 @@ public class CreateCND extends TestBase{
 	Passo2 passo2 = new Passo2();
 	Finalizado finalizado = new Finalizado();
 	public StringBuffer verificationErrors = new StringBuffer();
-	public static Integer cnd = 5;
+	public static Integer cnd = 1;
 	public static Integer i;
 
 	@Test

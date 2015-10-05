@@ -3,10 +3,13 @@ package com.ciandt.selenium.pages;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 
 import com.ciandt.selenium.helpers.Geral;
 import com.ciandt.selenium.regressao.TestBase;
+
 import static org.junit.Assert.fail;
 
 public class Passo2 extends TestBase{
@@ -22,12 +25,15 @@ public class Passo2 extends TestBase{
 	}
 
 	public void preencherNomeTitular(){
+		WebElement scroll = driver.findElement(By.cssSelector("p#txt-desc-recebimentos-2"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", scroll);
 		driver.findElement(By.cssSelector("div#fNomeDoTitularCartao > input#creditcardnameholder")).sendKeys("TESTE CIT");
 	}
 
 	public void preencherNumeroCartao(){
 		driver.findElement(By.cssSelector("div#fnumeroCartao > input#creditcardnumber")).click();
-		driver.findElement(By.cssSelector("div#fnumeroCartao > input#creditcardnumber")).sendKeys("5555666677778884");
+		driver.findElement(By.cssSelector("div#fnumeroCartao > input#creditcardnumber")).sendKeys("4929551508774256");
+		/*driver.findElement(By.cssSelector("div#fnumeroCartao > input#creditcardnumber")).sendKeys("6062825607632328");*/
 	}
 
 	public void preencherDataExpiracao(){

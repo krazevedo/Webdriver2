@@ -117,6 +117,10 @@ public class Passo1 extends TestBase{
 		WebElement element1 = driver.findElement(By.cssSelector("div#fPhone > input#phone"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].focus(); arguments[0].blur(); return true", element1);
+		
+		driver.findElement(By.cssSelector("div#fCellphone > input#cellphone")).sendKeys("(019) 93444-4444");
+		WebElement element2 = driver.findElement(By.cssSelector("div#fCellphone > input#cellphone"));
+		js.executeScript("arguments[0].focus(); arguments[0].blur(); return true", element2);
 	}
 
 	public void selecionarGenero() throws Exception{		 
@@ -127,7 +131,7 @@ public class Passo1 extends TestBase{
 	}
 
 	public void preencherRG(){
-		driver.findElement(By.id("rg")).sendKeys("2977269");
+		driver.findElement(By.id("rg")).sendKeys("MG15432321");
 	}
 
 	public void preencherEndereco() throws Exception{

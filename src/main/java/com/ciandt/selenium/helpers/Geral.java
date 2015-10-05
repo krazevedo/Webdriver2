@@ -16,7 +16,8 @@ public class Geral{
 	
 
 	public void abrirCadastro(WebDriver driver){
-		driver.get("http://cadastrohml.rede.natura.net/cadastro");
+		driver.get("http://cadastroqxx.rede.natura.net/cadastro");
+		/*driver.get("https://cadastro.rede.natura.net/cadastro");*/
 		/*driver.get("http://alfeu:7009/cadastro");*/
 	}
 
